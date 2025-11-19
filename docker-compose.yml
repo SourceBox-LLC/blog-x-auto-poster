@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  sourcebox-scheduler:
+    build: .
+    container_name: sourcebox-scheduler
+    env_file:
+      - .env
+    volumes:
+      - ./sourcebox_blog.db:/app/sourcebox_blog.db
+    restart: unless-stopped
+    # The Dockerfile CMD already runs `uv run main.py` in an hourly loop,
+    # so we do not override the command here.
